@@ -1,9 +1,9 @@
 #include <msp430.h>
 
-int button1_flag = 0;
-int button2_flag = 0;
-int led1_state = 0;
-int led2_state = 0;
+volatile int button1_flag = 0;
+volatile int button2_flag = 0;
+volatile int led1_state = 0;
+volatile int led2_state = 0;
 
 #pragma vector = PORT1_VECTOR
 __interrupt void button1Handler(void)
