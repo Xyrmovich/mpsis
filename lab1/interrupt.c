@@ -1,9 +1,9 @@
 #include <msp430.h>
 
-int button1_flag = 0;
-int button2_flag = 0;
-int led1_state = 0;
-int led2_state = 0;
+volatile int button1_flag = 0;
+volatile int button2_flag = 0;
+volatile int led1_state = 0;
+volatile int led2_state = 0;
 
 #pragma vector = PORT1_VECTOR
 __interrupt void button1Handler(void)
@@ -11,7 +11,7 @@ __interrupt void button1Handler(void)
     if (button1_flag == 0)
     {
         P1IES &= ~BIT7;
-        butt1_flag = 1;
+        button1_flag = 1;
     }
     else
     {
@@ -25,6 +25,7 @@ __interrupt void button1Handler(void)
             else
             {
                 P1OUT &= ~BIT3;
+                led1_state = 0;
             }
         }
         if (led2_state == 0)
@@ -33,7 +34,7 @@ __interrupt void button1Handler(void)
             led2_state = 1;
         }
         P1IES |= BIT7;
-        butt1_flag = 0;
+        button1_flag = 0;
     }
     volatile int i = 0;
     for (i = 0; i < 1000; i++)
@@ -45,22 +46,23 @@ __interrupt void button1Handler(void)
 #pragma vector = PORT2_VECTOR
 __interrupt void button2Handler(void)
 {
-    if (butt2_flag == 0)
+    if (button2_flag == 0)
     {
         if (button1_flag == 0)
         {
             if (led2_state == 1)
             {
                 P1OUT &= ~BIT4;
+                led2_state = 0;
             }
         }
         P2IES &= ~BIT2;
-        butt2_flag = 1;
+        button2_flag = 1;
     }
     else
     {
         P2IES |= BIT2;
-        butt2_flag = 0;
+        button2_flag = 0;
     }
     volatile int i = 0;
     for (i = 0; i < 1000; i++)

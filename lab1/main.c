@@ -6,8 +6,8 @@ int main(void)
     /**
      * Initial LEDs setup (LED 6 and LED 7)
      */
-    P1DIR = BIT3;
-    P1DIR = BIT4;
+    P1DIR |= BIT3;
+    P1DIR |= BIT4;
     P1OUT = 0;
     /**
      * Initial button setup
@@ -57,10 +57,14 @@ int main(void)
         {
             button1_flag = 1;
         }
-        if (button2 == 0 && button1_flag == 1)
+        if (button2 == 0 && button2_flag == 1)
         {
-            button2_flag == 0;
+            button2_flag = 0;
         }
+
+        int i = 0;
+        for(i = 0; i < 1000; ++i);
     }
+
     return 0;
 }
