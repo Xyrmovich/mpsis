@@ -2,7 +2,7 @@
 
 /*
 * Task:
-*  Default frequency : 55800Hz
+*  Default frequency : 558000Hz
 *  Alternative frequency : 3467Hz (default frequency / 16)
 *  Clock source: DCOCLKDIV
 *  Divider: 4
