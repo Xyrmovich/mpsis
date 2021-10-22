@@ -11,12 +11,11 @@
 
 volatile int short ALTERNATIVE_FREQUENCY_ON = 0;
 volatile int short LPM_MODE_1_ON = 0;
-#define DELAY_CYCLES 1000;
 
 #pragma vector = PORT1_VECTOR
 __interrupt void PORT1_S1(void)
 {
-    __delay_cycles(DELAY_CYCLES);
+    __delay_cycles(1000);
 
     if (LPM_MODE_1_ON)
     {
@@ -35,7 +34,7 @@ __interrupt void PORT1_S1(void)
 #pragma vector = PORT2_VECTOR
 __interrupt void PORT2_S2(void)
 {
-    __delay_cycles(DELAY_CYCLES);
+    __delay_cycles(1000);
 
     if (ALTERNATIVE_FREQUENCY_ON)
     {
