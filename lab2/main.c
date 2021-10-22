@@ -11,7 +11,7 @@
 
 volatile int short ALTERNATIVE_FREQUENCY_ON = 0;
 volatile int short LPM_MODE_1_ON = 0;
-volatile int short DELAY_CYCLES = 1000;
+#define DELAY_CYCLES 1000;
 
 #pragma vector = PORT1_VECTOR
 __interrupt void PORT1_S1(void)
