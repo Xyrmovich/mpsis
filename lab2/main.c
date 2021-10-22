@@ -2,10 +2,10 @@
 
 /*
 * Task:
-*  Default frequency : 558000Hz
-*  Alternative frequency : 3467Hz (default frequency / 16)
-*  Clock source: DCOCLKDIV
-*  Divider: 4
+*  DCOCLK frequency : 558000Hz
+*  MCLK frequency : 3467Hz (default frequency / 16)
+*  Alternative MCLK source: DCOCLKDIV
+*  Alternative MCLK divider: 4
 *  Low Power Mode (LPM): 1
 */
 
