@@ -39,13 +39,13 @@ __interrupt void PORT2_S2(void)
     if (ALTERNATIVE_FREQUENCY_ON)
     {
         UCSCTL4 = SELM__DCOCLK;
-        UCSCTL5 = DIVM__1;
+        UCSCTL5 = DIVM__16;
         ALTERNATIVE_FREQUENCY_ON = 0;
     }
     else
     {
         UCSCTL4 = SELM__DCOCLKDIV;
-        UCSCTL5 = DIVM__16;
+        UCSCTL5 = DIVM__4;
         ALTERNATIVE_FREQUENCY_ON = 1;
     }
 
@@ -80,10 +80,10 @@ int main(void)
     //DCOCLK = FLLREFCLK / FLLREFDIV * (FLLN + 1) * FLLD
 
     UCSCTL1 |= DCORSEL_0;
-    UCSCTL2 |= (FLLD__2 & FLLN8);
-    UCSCTL3 |= (SELREF__REFOCLK & FLLREFDIV__1);
+    UCSCTL2 |= (FLLD__2 | FLLN8);
+    UCSCTL3 |= (SELREF__REFOCLK | FLLREFDIV__1);
     UCSCTL4 |= SELM__DCOCLK;
-    UCSCTL5 |= DIVM__1;
+    UCSCTL5 |= DIVM__16;
 
     return 0;
 }
