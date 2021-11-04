@@ -39,14 +39,14 @@ __interrupt void PORT2_S2(void)
 
     if (ALTERNATIVE_FREQUENCY_ON)
     {
-        UCSCTL4 = SELM__DCOCLK;
-        UCSCTL5 = DIVM__1;
+        UCSCTL4 |= SELM__DCOCLK;
+        UCSCTL5 |= DIVM__1;
         ALTERNATIVE_FREQUENCY_ON = 0;
     }
     else
     {
-        UCSCTL4 = SELM__DCOCLKDIV;
-        UCSCTL5 = DIVM__16;
+        UCSCTL4 |= SELM__DCOCLKDIV;
+        UCSCTL5 |= DIVM__16;
         ALTERNATIVE_FREQUENCY_ON = 1;
     }
 
