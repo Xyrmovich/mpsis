@@ -2,21 +2,20 @@
 
 /*
 * Task:
-*  Default frequency : 55800Hz
-*  Alternative frequency : 3467Hz (default frequency / 16)
-*  Clock source: DCOCLKDIV
-*  Divider: 4
+*  DCOCLK frequency : 558000Hz
+*  MCLK frequency : 3467Hz (default frequency / 16)
+*  Alternative MCLK source: DCOCLKDIV
+*  Alternative MCLK divider: 4
 *  Low Power Mode (LPM): 1
 */
 
 volatile int short ALTERNATIVE_FREQUENCY_ON = 0;
 volatile int short LPM_MODE_1_ON = 0;
-volatile int short DELAY_CYCLES = 1000;
 
 #pragma vector = PORT1_VECTOR
 __interrupt void PORT1_S1(void)
 {
-    __delay_cycles(DELAY_CYCLES);
+    __delay_cycles(1000);
 
     if (LPM_MODE_1_ON)
     {
@@ -35,7 +34,7 @@ __interrupt void PORT1_S1(void)
 #pragma vector = PORT2_VECTOR
 __interrupt void PORT2_S2(void)
 {
-    __delay_cycles(DELAY_CYCLES);
+    __delay_cycles(1000);
 
     if (ALTERNATIVE_FREQUENCY_ON)
     {
@@ -81,10 +80,10 @@ int main(void)
     //DCOCLK = FLLREFCLK / FLLREFDIV * (FLLN + 1) * FLLD
 
     UCSCTL1 |= DCORSEL_0;
-    UCSCTL2 |= (FLLD__2 & FLLN8);
-    UCSCTL3 |= (SELREF__REFOCLK & FLLREFDIV__1);
+    UCSCTL2 |= (FLLD__2 | FLLN8);
+    UCSCTL3 |= (SELREF__REFOCLK | FLLREFDIV__1);
     UCSCTL4 |= SELM__DCOCLK;
-    UCSCTL5 |= DIVM__1;
+    UCSCTL5 |= DIVM__16;
 
     return 0;
 }
